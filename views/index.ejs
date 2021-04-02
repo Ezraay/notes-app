@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes App</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <div class="col-12 offset-0 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+      <h1 class="mt-5">Notes</h1>
+      <h4>Session: <%= sessionID %></h4>
+      <p class="mb-5">Tip: Click the text of a note to edit it.</p>
+
+      <!-- Notes Creation -->
+      <div class="form-inline">
+        <input
+          type="text"
+          class="form-control mb-2 mr-sm-2 flex-grow-1"
+          id="note-text-input"
+          placeholder="Text..."
+        />
+        <button type="submit" class="btn btn-primary mb-2" id="note-save">
+          Save Note
+        </button>
+      </div>
+
+      <!-- Notes Info -->
+      <div id="notes">
+        <% userNotes.forEach(note => { %>
+        <div class="note" noteID="<%= note.noteID %>">
+          <hr />
+          <div class="note-info d-flex flex-row justify-content-between">
+            <div class="d-flex flex-row">
+              <p class="font-weight-bold">
+                <%= (new Date(note.date)).toLocaleTimeString() %>
+              </p>
+              <p class="ml-3 note-text" style="cursor: pointer;"><%= note.text %></p>
+            </div>
+            <button type="button" class="delete-note close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+
+    <script src="/notes.js"></script>
+  </body>
+</html>
